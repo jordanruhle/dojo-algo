@@ -28,7 +28,7 @@ class SLL {
     insertFromBack(data){
         let newNode = new SLNode(data);
         // SLL IS EMPTY
-        if (this.head === null){
+        if (this.isEmpty()){
             this.head = newNode;
         } else {
             // SLL IS NOT EMPTY
@@ -49,26 +49,44 @@ class SLL {
         return this
     }
 
-    insertAtFront(data) {
+    // adds node to from of SLL
+    insertFromFront(data){
         let newNode = new SLNode(data);
-        if(this.head === null){
+        // SLL IS EMPTY
+        if (this.isEmpty()){
             this.head = newNode;
-        } else {
-            newNode.next = this.head
-            this.head = newNode;
+            return this
         }
+        // SLL IS NOT EMPTY
+        newNode.next = this.head;
+        this.head = newNode;
         return this
     }
 
-    removeAtFront() {
-        if(this.isEmpty()){
+    // remove node from from of SLL
+    removeAtFront(){
+        // SLL IS EMPTY
+        if (this.isEmpty()){
             return this
         }
-        this.head = this.next
-        this.head.next =this.next.next
+        // SLL IS NOT EMPTY
+        this.head = this.head.next;
         return this
     }
-}
+
+    // average values of SLL?
+    average(){
+        let total = 0;
+        let length = 0;
+        let runner = this.head;
+        while (runner !== null){
+            length++;
+            total += runner.value;
+            runner = runner.next;
+        }
+        console.log(`Average is: ${total/length}`)
+        return this
+    }
 
 
 let sll = new SLL();
