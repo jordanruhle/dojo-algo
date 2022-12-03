@@ -107,11 +107,99 @@ class SLL {
         return this;
     }
 
+    contains(target) {
+        // Is empty?
+        if (this.isEmpty()) {
+            return false
+        }
+        // Run through the Singly Linked List
+        let runner = this.head;
+        while (runner !== null) {
+            // Checking if runner's value is the target
+            if (runner.value == target) {
+                return true
+            }
+            runner = runner.next
+        }
+        // Did not find
+        return false
+    }
+
+    removeVal(val) {
+        // THE NODE TO REMOVE IS THE FIRST NODE
+        if (this.head.value == val) {
+            this.head = this.head.next;
+            return true;
+        }
+
+        let runner = this.head
+        // THE NODE TO REMOVE IS SOMEWHERE IN THE MIDDLE
+        // THE NODE TO REMOVE IS THE LAST NODE
+        while (runner.next != null) {
+            if (runner.next.value == val) {
+                runner.next = runner.next.next;
+                return true;
+            }
+            else {
+                runner = runner.next;
+            }
+        }
+            return false;
+            // THE NODE TO REMOVE IS NOT THERE
+    }
+
+    secondToLast() {
+        let runner = this.head
+        // SLL has 0 - 1 nodes
+        if (this.head == null || this.head.next == null) {
+            console.log("List is not long enough")
+            return null
+        // SLL has only 2 nodes
+        } else if (this.head.next.next == null) {
+            this.head = this.head.next
+            return this
+        // SLL has 3+ nodes
+        } else {
+            while(runner.next.next.next != null){
+                runner = runner.next
+            }
+            runner.next = runner.next.next
+        }
+        return this;
+    }
+
+    kthToLast(k) {
+        // return null if list isnt long enough
+        // check if list is empty
+        if(this.isEmpty()){
+            return null
+        }
+        // find length of list
+        let length = 0;
+        let runner = this.head
+        while(runner != null){
+            length++
+            runner = runner.next
+        }
+        console.log(length)
+        // reset runner
+        runner = this.head
+        for(let i = 1; i < length-k; i++){
+            runner = runner.next
+        }
+        runner.next = runner.next.next
+    }
 }
 
 
+
+
+
 let sll = new SLL();
-sll.seedFromArray([1, 2, 3, 4, 5])
+sll.seedFromArray([5,4,3,2,1])
 sll.printValues()
-sll.insertAtFront(9)
+console.log("~~~~~~~~~~~~~~~~~~~~~")
+
+sll.kthToLast(3)
+
 sll.printValues()
