@@ -146,6 +146,20 @@ class BinarySearchTree {
             }
         }
     }
+    // example of depth first search
+    toArrInOrder(node = this.root, vals = []){
+        //Basecase
+        console.log(node)
+        if(node != null){
+            //forward progress to left
+            this.toArrInOrder(node.left, vals)
+            //middle (after going all the way left)
+            vals.push(node.data)
+            //forward progress to left
+            this.toArrInOrder(node.right, vals)
+        }
+        return vals
+    }
 
     //  findClosestValue(target, current = this.root){
     //     // if Tree is empty
@@ -277,3 +291,4 @@ fullTree
   .insert(66)
   .insert(90);
 fullTree.print();
+console.log(fullTree.toArrInOrder())
