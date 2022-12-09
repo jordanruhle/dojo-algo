@@ -161,6 +161,30 @@ class BinarySearchTree {
         return vals
     }
 
+    size(node = this.root) {
+        //BASE CASE
+        if (node === null) {
+            return 0 
+        }
+        return 1 + this.size(node.left) + this.size(node.right)
+    }
+
+    height(node = this.root){
+        if(node === null){
+            return 0
+        }
+        let left = this.height(node.left)
+        let right = this.height(node.right)
+        return left > right ? 1 + left : right + 1;
+    }
+
+    isBalanced(node = this.root){
+        if(node === null){
+            return Math.abs(this.height(node.left) - this.height(node.right)) > 1 ?  false : true 
+        }
+        return this.isBalanced(node.left)
+    }
+
     //  findClosestValue(target, current = this.root){
     //     // if Tree is empty
     //     if(current == null){
@@ -277,18 +301,19 @@ const fullTree = new BinarySearchTree();
 fullTree
   .insert(25)
   .insert(15)
-  .insert(10)
+//   .insert(10)
   .insert(22)
-  .insert(4)
-  .insert(12)
-  .insert(18)
-  .insert(24)
+//   .insert(4)
+//   .insert(12)
+//   .insert(18)
+//   .insert(24)
   .insert(50)
-  .insert(35)
-  .insert(70)
-  .insert(31)
-  .insert(44)
-  .insert(66)
-  .insert(90);
+//   .insert(35)
+//   .insert(70)
+//   .insert(31)
+//   .insert(44)
+//   .insert(66)
+//   .insert(90);
 fullTree.print();
-console.log(fullTree.toArrInOrder())
+console.log(fullTree.height())
+// console.log(fullTree.isBalanced())
