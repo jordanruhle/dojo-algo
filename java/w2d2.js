@@ -111,7 +111,7 @@ class BinarySearchTree {
 
     insert(newVal) {
         // BST IS EMPTY
-        if (this.isEmpty()){
+        if (this.isEmpty()) {
             // CREATE A NEW BST NODE
             // POINT THE ROOT TO THE NEW BST NODE
             // RETURN THIS
@@ -121,36 +121,36 @@ class BinarySearchTree {
         // BST IS NOT EMPTY
         // SET THE RUNNER AT THE ROOT
         let runner = this.root
-        while(true){
+        while (true) {
             // COMPARE THE newValue TO runner data
-            if(newVal > runner.data ) {
+            if (newVal > runner.data) {
                 // CHECK TO SEE IF THE runner LEFT or RIGHT POINTS TO ANOTHER NODE
                 // IF LEFT or RIGHT points to NULL
-                if(runner.right === null){
+                if (runner.right === null) {
                     runner.right = new BSTNode(newVal)
                     return this;
-                } 
+                }
                 // POINT THE runner LEFT or RIGHT to the NEW BST NODE
                 runner = runner.right
             }
             // COMPARE THE newValue TO runner data
-            if(newVal < runner.data ) {
+            if (newVal < runner.data) {
                 // CHECK TO SEE IF THE runner LEFT or RIGHT POINTS TO ANOTHER NODE
                 // IF LEFT or RIGHT points to NULL
-                if(runner.left === null){
+                if (runner.left === null) {
                     runner.left = new BSTNode(newVal)
                     return this;
-                } 
+                }
                 // POINT THE runner LEFT or RIGHT to the NEW BST NODE
-                    runner = runner.left
+                runner = runner.left
             }
         }
     }
     // example of depth first search
-    toArrInOrder(node = this.root, vals = []){
+    toArrInOrder(node = this.root, vals = []) {
         //Basecase
         console.log(node)
-        if(node != null){
+        if (node != null) {
             //forward progress to left
             this.toArrInOrder(node.left, vals)
             //middle (after going all the way left)
@@ -164,13 +164,13 @@ class BinarySearchTree {
     size(node = this.root) {
         //BASE CASE
         if (node === null) {
-            return 0 
+            return 0
         }
         return 1 + this.size(node.left) + this.size(node.right)
     }
 
-    height(node = this.root){
-        if(node === null){
+    height(node = this.root) {
+        if (node === null) {
             return 0
         }
         let left = this.height(node.left)
@@ -178,9 +178,9 @@ class BinarySearchTree {
         return left > right ? 1 + left : right + 1;
     }
 
-    isBalanced(node = this.root){
-        if(node === null){
-            return Math.abs(this.height(node.left) - this.height(node.right)) > 1 ?  false : true 
+    isBalanced(node = this.root) {
+        if (node === null) {
+            return Math.abs(this.height(node.left) - this.height(node.right)) > 1 ? false : true
         }
         return this.isBalanced(node.left)
     }
@@ -226,6 +226,27 @@ class BinarySearchTree {
         );
 
         this.print(node.left, spaceCnt);
+    }
+    branchSums(root, sum = 0, outputArr = []) {
+        console.log(root.data)
+        sum += this.data
+        console.log("sum " + sum)
+        console.log("root " + root)
+        console.log("output " + outputArr)
+        // both left and right are empty
+        if (this.right == null && this.left == null) {
+            outputArr.push(sum);
+            return outputArr
+        }
+        // if only left has data
+        if (this.left != null) {
+            branchSums(this.left, currentSum, outputArr)
+        }
+        if (this.right != null) {
+            branchSums(this.right, currentSum, outputArr)
+        }
+        return outputArr
+
     }
 
 }
@@ -299,21 +320,21 @@ twoLevelTree.root.right = new BSTNode(15);
 
 const fullTree = new BinarySearchTree();
 fullTree
-  .insert(25)
-  .insert(15)
-//   .insert(10)
-  .insert(22)
-//   .insert(4)
-//   .insert(12)
-//   .insert(18)
-//   .insert(24)
-  .insert(50)
-//   .insert(35)
-//   .insert(70)
-//   .insert(31)
-//   .insert(44)
-//   .insert(66)
-//   .insert(90);
+    .insert(25)
+    .insert(15)
+    .insert(10)
+    .insert(22)
+    .insert(4)
+    .insert(12)
+    .insert(18)
+    .insert(24)
+    .insert(50)
+    .insert(35)
+    .insert(70)
+    .insert(31)
+    .insert(44)
+    .insert(66)
+    .insert(90);
 fullTree.print();
-console.log(fullTree.height())
+console.log(fullTree.branchSums(this.root))
 // console.log(fullTree.isBalanced())
