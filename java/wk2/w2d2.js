@@ -246,7 +246,39 @@ class BinarySearchTree {
             this.branchSums(root.right, currentSum, outputArr)
         }
         return outputArr
+    }
 
+    toArrLevelorder(current = this.root) {
+        const queue = []
+        const vals = []
+        // shift - it removes / returns the first element in the array
+        // const removedElement = queue.shift()
+  
+        // if current exists
+          // add the the curent node to the queue
+          if(current != null){
+            queue.push(current)
+          }
+        
+        while(queue.length > 0){
+          // remove the first element in the queue
+          // PUSH TO vals THE BST NODE'S VALUE
+          let removedElement = queue.shift()
+          vals.push(removedElement.data)
+            
+          // IF REMOVED NODE'S LEFT EXISTS
+          if(removedElement.left != null){
+              // PUSH TO queue THE LEFT OF THE NODE
+            queue.push(removedElement.left)
+          }
+          // IF REMOVED NODDE'S RIGHT EXISTS
+          if(removedElement.right != null){
+            // PUSH TO queue THE RIGHT OF THE NODE
+            queue.push(removedElement.right)
+        }
+    }
+        // RETURN vals
+        return vals
     }
 
 }
@@ -336,5 +368,5 @@ fullTree
     .insert(66)
     .insert(90);
 fullTree.print();
-console.log(fullTree.branchSums())
+console.log(fullTree.toArrLevelorder())
 // console.log(fullTree.isBalanced())
